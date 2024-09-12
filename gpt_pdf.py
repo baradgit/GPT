@@ -29,7 +29,10 @@ def get_gpt35_response(prompt, api_key):
 
 # Streamlit application
 st.title("PDF Text Prediction with GPT-3.5")
-st.markdown('<mark>Please check you PDF text is pure not image text sample file is added in github gen gpt repo.</mark>', unsafe_allow_html=True)
+st.markdown(
+    '<p style="background-color: yellow; font-weight: bold;">Please check your PDF text is pure,,, not image text., Sample file is added in the GitHub gen GPT repo.</p>',
+    unsafe_allow_html=True
+)
 
 # API key input
 api_key = st.text_input("Enter your OpenAI API key:", type="password")
