@@ -44,7 +44,7 @@ matplotlib-inline==0.1.7
 mdurl==0.1.2
 nest-asyncio==1.6.0
 numpy==1.26.4
-openai==1.44.1
+openai==0.28
 orjson==3.10.7
 packaging==24.0
 pandas==2.2.2
