@@ -12,14 +12,18 @@ def extract_text_from_pdf(pdf_file):
 def create_prompt(text, query):
     return f"Based on the following text: \"{text}\", {query}"
 
-def get_gpt3_response(prompt, api_key):
+def get_gpt35_response(prompt, api_key):
     openai.api_key = api_key
-    response = openai.Completion.create(
-        engine="text-davinci-003",  # or other GPT-3.5 engines
-        prompt=prompt,
-        max_tokens=100  # Adjust based on your needs
-    )
-    return response.choices[0].text.strip()
+    try:
+        response = openai.chat.Completion.create(
+            model="gpt-3.5-turbo",  # Use GPT-3.5-turbo
+            messages=[{"role": "system", "content": "You are a helpful assistant."},
+                      {"role": "user", "content": prompt}],
+            max_tokens=100  # Adjust based on your needs
+        )
+        return response['choices'][0]['message']['content'].strip()
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 # Streamlit application
 st.title("PDF Text Prediction with GPT-3.5")
@@ -45,7 +49,7 @@ if uploaded_file is not None and api_key:
         
         # Get the response from GPT-3.5
         with st.spinner("Generating response..."):
-            response = get_gpt3_response(prompt, api_key)
+            response = get_gpt35_response(prompt, api_key)
         
         st.write("Response from GPT-3.5:")
         st.write(response)
