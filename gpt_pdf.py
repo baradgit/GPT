@@ -15,10 +15,12 @@ def create_prompt(text, query):
 def get_gpt35_response(prompt, api_key):
     openai.api_key = api_key
     try:
-        response = openai.chat.Completion.create(
-            model="gpt-3.5-turbo",  # Use GPT-3.5-turbo
-            messages=[{"role": "system", "content": "You are a helpful assistant."},
-                      {"role": "user", "content": prompt}],
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # Correct model call
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ],
             max_tokens=100  # Adjust based on your needs
         )
         return response['choices'][0]['message']['content'].strip()
